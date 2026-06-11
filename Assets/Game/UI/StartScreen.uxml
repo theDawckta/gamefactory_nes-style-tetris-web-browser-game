@@ -14,7 +14,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="start-prompt-region" style="flex-grow: 0; height: 60px; justify-content: center; align-items: center; border-top-width: 2px; border-top-color: rgba(255, 255, 255, 1);">
-            <ui:Label text="PRESS ENTER TO START" name="start-prompt-text" style="font-size: 20px; color: rgba(255, 255, 255, 1);" />
+            <ui:Label text="PRESS ENTER" name="start-prompt-text" class="start-prompt-text" style="color: rgba(255, 255, 255, 1);" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

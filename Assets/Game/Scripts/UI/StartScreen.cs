@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -14,6 +15,7 @@ namespace Tetris.UI
         private LeaderboardWidget _leaderboardWidget;
         private Label _startPromptText;
         private Action<List<LeaderboardEntry>> _onScoresFetched;
+        private Coroutine _blinkCoroutine;
 
         public event Action OnStartPressed;
 
@@ -55,11 +57,13 @@ namespace Tetris.UI
         {
             base.Show();
             FetchAndDisplayScores();
+            StartBlinking();
         }
 
         public override void Hide()
         {
             base.Hide();
+            StopBlinking();
         }
 
         private void FetchAndDisplayScores()
@@ -90,6 +94,35 @@ namespace Tetris.UI
             {
                 OnStartPressed?.Invoke();
                 evt.StopPropagation();
+            }
+        }
+
+        private void StartBlinking()
+        {
+            StopBlinking();
+            if (_startPromptText != null)
+            {
+                _blinkCoroutine = StartCoroutine(BlinkCoroutine());
+            }
+        }
+
+        private void StopBlinking()
+        {
+            if (_blinkCoroutine != null)
+            {
+                StopCoroutine(_blinkCoroutine);
+                _blinkCoroutine = null;
+            }
+        }
+
+        private IEnumerator BlinkCoroutine()
+        {
+            while (true)
+            {
+                _startPromptText.style.display = DisplayStyle.Flex;
+                yield return new WaitForSecondsRealtime(0.5f);
+                _startPromptText.style.display = DisplayStyle.None;
+                yield return new WaitForSecondsRealtime(0.5f);
             }
         }
     }
