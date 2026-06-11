@@ -2,13 +2,27 @@
 
 #game-over-header {
     font-size: 32px;
+    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
     -unity-font: resource('Fonts & Materials/LegacyRuntime');
+}
+
+.final-score-widget-header {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 1);
+    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
+}
+
+.final-score-widget-value {
+    font-size: 28px;
+    color: rgba(255, 255, 255, 1);
+    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
 }
 
 #final-score-value,
 #final-level-value {
     font-size: 28px;
-    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+    color: rgba(255, 255, 255, 1);
+    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
 }
 
 #top-score-message,

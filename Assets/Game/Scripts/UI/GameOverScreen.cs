@@ -10,8 +10,7 @@ namespace Tetris.UI
     public class GameOverScreen : BaseScreen
     {
         private Label _headerText;
-        private Label _finalScoreText;
-        private Label _finalLevelText;
+        private FinalScoreWidget _finalScoreWidget;
         private Label _topScoreMessageText;
         private Label _continuePromptText;
 
@@ -23,8 +22,8 @@ namespace Tetris.UI
             base.Awake();
 
             _headerText = GetElement("game-over-header") as Label;
-            _finalScoreText = GetElement("final-score-value") as Label;
-            _finalLevelText = GetElement("final-level-value") as Label;
+            var rootElement = GetElement("");
+            _finalScoreWidget = new FinalScoreWidget(rootElement);
             _topScoreMessageText = GetElement("top-score-message") as Label;
             _continuePromptText = GetElement("continue-prompt") as Label;
         }
@@ -51,10 +50,7 @@ namespace Tetris.UI
         {
             base.Show();
 
-            if (_finalScoreText != null)
-                _finalScoreText.text = finalScore.ToString();
-            if (_finalLevelText != null)
-                _finalLevelText.text = finalLevel.ToString();
+            _finalScoreWidget?.SetFinalScore(finalScore, finalLevel);
 
             bool isTopScore = IsTopScore(finalScore, currentLeaderboard);
 
@@ -79,10 +75,7 @@ namespace Tetris.UI
         {
             base.Hide();
 
-            if (_finalScoreText != null)
-                _finalScoreText.text = "";
-            if (_finalLevelText != null)
-                _finalLevelText.text = "";
+            _finalScoreWidget?.SetFinalScore(0, 0);
             if (_topScoreMessageText != null)
                 _topScoreMessageText.style.display = DisplayStyle.None;
             if (_continuePromptText != null)

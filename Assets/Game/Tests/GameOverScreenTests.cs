@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Tetris.UI;
 using Tetris.Services;
 
@@ -164,6 +165,87 @@ namespace Tetris.Tests.UI
             _gameOverScreen.Show(1000, 1, null);
 
             Assert.IsTrue(eventFired);
+        }
+    }
+
+    public class FinalScoreWidgetTests
+    {
+        private GameObject _widgetGameObject;
+        private VisualElement _rootElement;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _widgetGameObject = new GameObject("TestFinalScoreWidget");
+            var uiDocument = _widgetGameObject.AddComponent<UIDocument>();
+
+            var uxmlAsset = Resources.Load<VisualTreeAsset>("UI/GameOverScreen");
+            if (uxmlAsset != null)
+            {
+                _rootElement = uxmlAsset.Instantiate();
+            }
+            else
+            {
+                _rootElement = new VisualElement();
+                var finalScoreValue = new Label { name = "final-score-value", text = "0" };
+                var finalLevelValue = new Label { name = "final-level-value", text = "0" };
+                _rootElement.Add(finalScoreValue);
+                _rootElement.Add(finalLevelValue);
+            }
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Object.DestroyImmediate(_widgetGameObject);
+        }
+
+        [Test]
+        public void FinalScoreWidgetSetFinalScoreUpdatesScore()
+        {
+            var widget = new Tetris.UI.FinalScoreWidget(_rootElement);
+
+            widget.SetFinalScore(9500, 5);
+
+            var scoreLabel = _rootElement.Q<Label>("final-score-value");
+            Assert.AreEqual("9500", scoreLabel.text);
+        }
+
+        [Test]
+        public void FinalScoreWidgetSetFinalScoreUpdatesLevel()
+        {
+            var widget = new Tetris.UI.FinalScoreWidget(_rootElement);
+
+            widget.SetFinalScore(9500, 5);
+
+            var levelLabel = _rootElement.Q<Label>("final-level-value");
+            Assert.AreEqual("5", levelLabel.text);
+        }
+
+        [Test]
+        public void FinalScoreWidgetSetFinalScoreWithZeroValues()
+        {
+            var widget = new Tetris.UI.FinalScoreWidget(_rootElement);
+
+            widget.SetFinalScore(0, 0);
+
+            var scoreLabel = _rootElement.Q<Label>("final-score-value");
+            var levelLabel = _rootElement.Q<Label>("final-level-value");
+            Assert.AreEqual("0", scoreLabel.text);
+            Assert.AreEqual("0", levelLabel.text);
+        }
+
+        [Test]
+        public void FinalScoreWidgetSetFinalScoreLargeValues()
+        {
+            var widget = new Tetris.UI.FinalScoreWidget(_rootElement);
+
+            widget.SetFinalScore(999999, 99);
+
+            var scoreLabel = _rootElement.Q<Label>("final-score-value");
+            var levelLabel = _rootElement.Q<Label>("final-level-value");
+            Assert.AreEqual("999999", scoreLabel.text);
+            Assert.AreEqual("99", levelLabel.text);
         }
     }
 }
