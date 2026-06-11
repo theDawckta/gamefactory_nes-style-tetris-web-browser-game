@@ -1,0 +1,18 @@
+/* Game Over Screen Stylesheet */
+
+#game-over-header {
+    font-size: 32px;
+    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+}
+
+#final-score-value,
+#final-level-value {
+    font-size: 28px;
+    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+}
+
+#top-score-message,
+#continue-prompt {
+    font-size: 20px;
+    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+}
