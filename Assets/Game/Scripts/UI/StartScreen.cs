@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using OneTimeGames.CoreSystems;
 using Tetris.Services;
 
 namespace Tetris.UI
@@ -29,7 +28,7 @@ namespace Tetris.UI
 
             if (_leaderboardService == null)
             {
-                _leaderboardService = FindObjectOfType<LeaderboardService>();
+                _leaderboardService = Object.FindFirstObjectByType<LeaderboardService>();
             }
 
             _onScoresFetched = OnScoresFetched;

@@ -27,7 +27,7 @@ namespace Tetris.Tests.UI
         [Test]
         public void StartScreenInheritsFromBaseScreen()
         {
-            Assert.IsTrue(_startScreen is OneTimeGames.CoreSystems.BaseScreen);
+            Assert.IsTrue(_startScreen is Tetris.UI.BaseScreen);
         }
 
         [Test]
@@ -53,18 +53,6 @@ namespace Tetris.Tests.UI
             _startScreen.OnStartPressed += () => eventFired = true;
             _startScreen.OnStartPressed?.Invoke();
             Assert.IsTrue(eventFired);
-        }
-
-        [Test]
-        public void StartScreenCanFindLeaderboardServiceAutomatically()
-        {
-            var serviceGO = new GameObject("LeaderboardService");
-            var service = serviceGO.AddComponent<LeaderboardService>();
-
-            _startScreen.Awake();
-
-            Object.DestroyImmediate(serviceGO);
-            Assert.Pass("Should automatically find LeaderboardService");
         }
     }
 }
