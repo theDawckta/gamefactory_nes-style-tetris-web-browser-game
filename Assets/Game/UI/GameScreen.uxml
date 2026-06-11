@@ -8,6 +8,10 @@
                 <ui:Label name="score-header" text="SCORE" class="score-widget-header" />
                 <ui:Label name="score-value" text="0" class="score-widget-value" />
             </ui:VisualElement>
+            <ui:VisualElement name="level-widget" class="level-widget">
+                <ui:Label name="level-header" text="LEVEL" class="level-widget-header" />
+                <ui:Label name="level-value" text="0" class="level-widget-value" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="pause-overlay-region" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; background-color: rgba(0, 0, 0, 0.7);" />
     </ui:VisualElement>
