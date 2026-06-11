@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Style src="project://database/Assets/Game/UI/GameScreen.uss" />
+    <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: row;">
+        <ui:VisualElement name="playfield-region" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
+        <ui:VisualElement name="score-panel-region" style="flex-grow: 0; width: 200px; padding: 10px; border-left-width: 1px; border-left-color: rgba(255, 255, 255, 1); background-color: rgba(0, 0, 0, 1);" />
+        <ui:VisualElement name="pause-overlay-region" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; background-color: rgba(0, 0, 0, 0.7);" />
+    </ui:VisualElement>
+</ui:UXML>
