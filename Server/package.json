@@ -1,0 +1,16 @@
+{
+  "name": "tetris-leaderboard-server",
+  "version": "1.0.0",
+  "description": "Companion leaderboard server for NES-style Tetris (global top-5 scores)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
