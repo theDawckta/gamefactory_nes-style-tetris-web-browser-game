@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "com.onetimegames.coresystems": "https://github.com/theDawckta/ai-game-factory.git?path=/CoreSystems",
+    "com.onetimegames.coreassets": "https://github.com/theDawckta/ai-game-factory.git?path=/CoreAssets",
+    "com.unity.inputsystem": "1.11.2",
+    "com.unity.test-framework": "1.4.5"
+  }
+}
