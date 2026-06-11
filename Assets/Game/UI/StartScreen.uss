@@ -3,3 +3,8 @@
     image-rendering: pixelated;
     -unity-background-scale-mode: scale-to-fit;
 }
+
+.start-prompt-text {
+    font-size: 20px;
+    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+}

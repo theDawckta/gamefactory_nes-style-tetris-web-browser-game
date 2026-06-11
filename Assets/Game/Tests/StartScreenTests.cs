@@ -63,5 +63,20 @@ namespace Tetris.Tests.UI
             Assert.IsTrue(eventSubscribed);
         }
 
+        [Test]
+        public void StartPromptTextElementExists()
+        {
+            var promptText = _startScreen.GetElement("start-prompt-text");
+            Assert.IsNotNull(promptText);
+        }
+
+        [Test]
+        public void StartPromptTextDisplaysCorrectText()
+        {
+            var promptLabel = _startScreen.GetElement("start-prompt-text") as UnityEngine.UIElements.Label;
+            Assert.IsNotNull(promptLabel);
+            Assert.AreEqual("PRESS ENTER", promptLabel.text);
+        }
+
     }
 }
