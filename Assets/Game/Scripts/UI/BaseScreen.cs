@@ -30,7 +30,7 @@ namespace Tetris.UI
             gameObject.SetActive(false);
         }
 
-        protected VisualElement GetElement(string name)
+        public VisualElement GetElement(string name)
         {
             if (_document?.rootVisualElement == null)
                 return null;

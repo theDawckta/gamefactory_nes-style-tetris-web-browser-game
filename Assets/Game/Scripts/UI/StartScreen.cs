@@ -28,7 +28,7 @@ namespace Tetris.UI
 
             if (_leaderboardService == null)
             {
-                _leaderboardService = Object.FindFirstObjectByType<LeaderboardService>();
+                _leaderboardService = UnityEngine.Object.FindAnyObjectByType<LeaderboardService>();
             }
 
             _onScoresFetched = OnScoresFetched;

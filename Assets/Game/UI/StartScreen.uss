@@ -1,0 +1,5 @@
+#title-logo {
+    background-image: url('project://database/Assets/Game/Sprites/TitleLogo/TitleLogo.png');
+    image-rendering: pixelated;
+    -unity-background-scale-mode: scale-to-fit;
+}
