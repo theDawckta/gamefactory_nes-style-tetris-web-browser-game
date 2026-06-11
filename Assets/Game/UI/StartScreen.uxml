@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Style src="project://database/Assets/Game/UI/StartScreen.uss?fileID=7433441132597879392&amp;guid=YOUR_USS_GUID&amp;type=3#StartScreen" />
+    <Style src="project://database/Assets/Game/UI/StartScreen.uss" />
     <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgba(0, 0, 0, 1); padding: 20px; justify-content: space-between;">
         <ui:VisualElement name="title-region" style="flex-grow: 0; height: 100px; justify-content: center; align-items: center; border-bottom-width: 2px; border-bottom-color: rgba(255, 255, 255, 1);">
-            <ui:Label text="TETRIS" name="title-text" style="font-size: 48px; color: rgba(255, 255, 255, 1);" />
+            <ui:Image name="title-logo" class="pixelated-image" style="width: 256px; height: 64px;" />
         </ui:VisualElement>
         <ui:VisualElement name="leaderboard-region" style="flex-grow: 1; margin: 20px 0px;">
             <ui:Label text="TOP 5 SCORES" name="leaderboard-header" style="font-size: 24px; color: rgba(255, 255, 255, 1); margin-bottom: 10px;" />
