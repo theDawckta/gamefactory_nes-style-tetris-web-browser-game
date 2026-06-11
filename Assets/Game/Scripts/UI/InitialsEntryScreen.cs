@@ -14,6 +14,7 @@ namespace Tetris.UI
         private VisualElement _characterSlotsRegion;
         private VisualElement _confirmRegion;
         private Label _confirmPromptText;
+        private CharacterSlotsWidget _characterSlotsWidget;
 
         private int[] _currentCharacterIndices = new int[TOTAL_SLOTS];
         private int _activeSlot = 0;
@@ -31,6 +32,11 @@ namespace Tetris.UI
             _characterSlotsRegion = GetElement("character-slots-region");
             _confirmRegion = GetElement("confirm-region");
             _confirmPromptText = GetElement("confirm-prompt") as Label;
+
+            if (_characterSlotsRegion != null)
+            {
+                _characterSlotsWidget = new CharacterSlotsWidget(_characterSlotsRegion);
+            }
 
             ResetSlotState();
         }
@@ -51,6 +57,11 @@ namespace Tetris.UI
             {
                 rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);
             }
+        }
+
+        private void Update()
+        {
+            _characterSlotsWidget?.Update();
         }
 
         public void Show(int score)
@@ -78,6 +89,7 @@ namespace Tetris.UI
                 _slotConfirmed[i] = false;
             }
             _activeSlot = 0;
+            _characterSlotsWidget?.Reset();
         }
 
         private void OnKeyDown(KeyDownEvent evt)
@@ -112,6 +124,8 @@ namespace Tetris.UI
             _currentCharacterIndices[_activeSlot]++;
             if (_currentCharacterIndices[_activeSlot] >= CHARACTER_SET.Length)
                 _currentCharacterIndices[_activeSlot] = 0;
+
+            UpdateSlotDisplay();
         }
 
         private void CycleCharacterPrevious()
@@ -122,6 +136,8 @@ namespace Tetris.UI
             _currentCharacterIndices[_activeSlot]--;
             if (_currentCharacterIndices[_activeSlot] < 0)
                 _currentCharacterIndices[_activeSlot] = CHARACTER_SET.Length - 1;
+
+            UpdateSlotDisplay();
         }
 
         private void DeleteCurrentCharacter()
@@ -130,6 +146,7 @@ namespace Tetris.UI
                 return;
 
             _currentCharacterIndices[_activeSlot] = -1;
+            UpdateSlotDisplay();
         }
 
         private void ConfirmCharacterAndAdvance()
@@ -140,7 +157,9 @@ namespace Tetris.UI
                     return;
 
                 _slotConfirmed[_activeSlot] = true;
+                _characterSlotsWidget?.SetSlotConfirmed(_activeSlot, true);
                 _activeSlot++;
+                _characterSlotsWidget?.SetActiveSlot(_activeSlot);
             }
             else if (_activeSlot == TOTAL_SLOTS - 1 && !_slotConfirmed[_activeSlot])
             {
@@ -148,6 +167,7 @@ namespace Tetris.UI
                     return;
 
                 _slotConfirmed[_activeSlot] = true;
+                _characterSlotsWidget?.SetSlotConfirmed(_activeSlot, true);
                 ShowConfirmPrompt();
             }
             else if (AllSlotsConfirmed())
@@ -170,6 +190,18 @@ namespace Tetris.UI
                     return false;
             }
             return true;
+        }
+
+        private void UpdateSlotDisplay()
+        {
+            if (_characterSlotsWidget == null)
+                return;
+
+            char displayChar = _currentCharacterIndices[_activeSlot] >= 0 && _currentCharacterIndices[_activeSlot] < CHARACTER_SET.Length
+                ? CHARACTER_SET[_currentCharacterIndices[_activeSlot]]
+                : '_';
+
+            _characterSlotsWidget.SetSlotCharacter(_activeSlot, displayChar);
         }
 
         private void SubmitInitials()
