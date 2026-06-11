@@ -55,5 +55,11 @@ namespace Tetris.Tests.UI
         {
             Assert.DoesNotThrow(() => _gameScreen.UpdateLevel(5));
         }
+
+        [Test]
+        public void GameScreenUpdateLinesDoesNotThrow()
+        {
+            Assert.DoesNotThrow(() => _gameScreen.UpdateLines(10));
+        }
     }
 }

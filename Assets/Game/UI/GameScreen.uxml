@@ -12,6 +12,10 @@
                 <ui:Label name="level-header" text="LEVEL" class="level-widget-header" />
                 <ui:Label name="level-value" text="0" class="level-widget-value" />
             </ui:VisualElement>
+            <ui:VisualElement name="lines-widget" class="lines-widget">
+                <ui:Label name="lines-header" text="LINES" class="lines-widget-header" />
+                <ui:Label name="lines-value" text="0" class="lines-widget-value" />
+            </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="pause-overlay-region" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; background-color: rgba(0, 0, 0, 0.7);" />
     </ui:VisualElement>
