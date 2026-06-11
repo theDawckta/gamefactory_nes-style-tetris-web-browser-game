@@ -43,5 +43,11 @@ namespace Tetris.Tests.UI
             _gameScreen.Hide();
             Assert.IsFalse(_screenGameObject.activeInHierarchy);
         }
+
+        [Test]
+        public void GameScreenUpdateScoreDoesNotThrow()
+        {
+            Assert.DoesNotThrow(() => _gameScreen.UpdateScore(9999));
+        }
     }
 }
