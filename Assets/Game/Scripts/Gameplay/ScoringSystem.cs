@@ -34,6 +34,11 @@ namespace Game.Gameplay
             _level = newLevel;
         }
 
+        public void AddSoftDropScore(int rowsDropped)
+        {
+            _score += rowsDropped;
+        }
+
         public void Reset()
         {
             _score = 0;
