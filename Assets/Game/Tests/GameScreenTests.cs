@@ -49,5 +49,11 @@ namespace Tetris.Tests.UI
         {
             Assert.DoesNotThrow(() => _gameScreen.UpdateScore(9999));
         }
+
+        [Test]
+        public void GameScreenUpdateLevelDoesNotThrow()
+        {
+            Assert.DoesNotThrow(() => _gameScreen.UpdateLevel(5));
+        }
     }
 }
