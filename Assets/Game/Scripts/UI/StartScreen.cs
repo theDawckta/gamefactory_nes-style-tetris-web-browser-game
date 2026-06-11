@@ -11,8 +11,7 @@ namespace Tetris.UI
         [SerializeField]
         private LeaderboardService _leaderboardService;
 
-        private ScrollView _scoresContainer;
-        private VisualElement _loadingIndicator;
+        private LeaderboardWidget _leaderboardWidget;
         private Label _startPromptText;
         private Action<List<LeaderboardEntry>> _onScoresFetched;
 
@@ -22,8 +21,8 @@ namespace Tetris.UI
         {
             base.Awake();
 
-            _scoresContainer = GetElement("scores-container") as ScrollView;
-            _loadingIndicator = GetElement("loading-indicator");
+            var rootElement = GetElement("");
+            _leaderboardWidget = new LeaderboardWidget(rootElement);
             _startPromptText = GetElement("start-prompt-text") as Label;
 
             if (_leaderboardService == null)
@@ -60,7 +59,6 @@ namespace Tetris.UI
 
         public override void Hide()
         {
-            ClearLeaderboard();
             base.Hide();
         }
 
@@ -69,57 +67,21 @@ namespace Tetris.UI
             if (_leaderboardService == null)
                 return;
 
-            ShowLoadingIndicator(true);
+            _leaderboardWidget?.SetLoading(true);
             _leaderboardService.FetchScores(_onScoresFetched);
         }
 
         private void OnScoresFetched(List<LeaderboardEntry> scores)
         {
-            ShowLoadingIndicator(false);
-
-            if (_scoresContainer == null)
-                return;
+            _leaderboardWidget?.SetLoading(false);
 
             if (scores == null || scores.Count == 0)
             {
-                _scoresContainer.Clear();
-                _scoresContainer.Add(new Label { text = "NO SCORES YET" });
+                _leaderboardWidget?.Populate(new List<LeaderboardEntry>());
                 return;
             }
 
-            DisplayScores(scores);
-        }
-
-        private void DisplayScores(List<LeaderboardEntry> scores)
-        {
-            if (_scoresContainer == null)
-                return;
-
-            _scoresContainer.Clear();
-
-            int displayCount = Mathf.Min(5, scores.Count);
-            for (int i = 0; i < displayCount; i++)
-            {
-                LeaderboardEntry entry = scores[i];
-                string scoreText = $"{entry.rank}. {entry.initials} {entry.score}";
-                _scoresContainer.Add(new Label { text = scoreText });
-            }
-        }
-
-        private void ShowLoadingIndicator(bool show)
-        {
-            if (_loadingIndicator != null)
-            {
-                _loadingIndicator.style.display = show ? DisplayStyle.Flex : DisplayStyle.None;
-            }
-        }
-
-        private void ClearLeaderboard()
-        {
-            if (_scoresContainer != null)
-            {
-                _scoresContainer.Clear();
-            }
+            _leaderboardWidget?.Populate(scores);
         }
 
         private void OnKeyDown(KeyDownEvent evt)
