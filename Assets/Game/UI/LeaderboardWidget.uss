@@ -1,0 +1,39 @@
+#leaderboard-table {
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.leaderboard-row {
+    flex-direction: row;
+    margin-bottom: 8px;
+    align-items: center;
+}
+
+.leaderboard-cell {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    white-space: nowrap;
+}
+
+.leaderboard-rank {
+    width: 40px;
+    min-width: 40px;
+}
+
+.leaderboard-initials {
+    flex-grow: 1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.leaderboard-score {
+    width: 80px;
+    -unity-text-align: middle-right;
+}
+
+#leaderboard-loading {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    justify-content: center;
+    align-items: center;
+}
