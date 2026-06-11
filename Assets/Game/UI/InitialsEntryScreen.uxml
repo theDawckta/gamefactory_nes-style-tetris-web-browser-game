@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Style src="project://database/Assets/Game/UI/InitialsEntryScreen.uss" />
+    <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgba(0, 0, 0, 1); padding: 20px; justify-content: space-between; flex-direction: column;">
+        <ui:VisualElement name="prompt-region" style="flex-grow: 0; height: 80px; justify-content: center; align-items: center; border-bottom-width: 2px; border-bottom-color: rgba(255, 255, 255, 1);">
+            <ui:Label text="NEW HIGH SCORE" name="prompt-text" style="color: rgba(255, 255, 255, 1); font-size: 24px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="character-slots-region" style="flex-grow: 1; justify-content: center; align-items: center; margin: 20px 0px;">
+            <ui:VisualElement style="flex-direction: column; justify-content: center; align-items: center;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="confirm-region" style="flex-grow: 0; height: 80px; justify-content: center; align-items: center; border-top-width: 2px; border-top-color: rgba(255, 255, 255, 1); display: none;">
+            <ui:Label text="PRESS DOWN TO CONFIRM" name="confirm-prompt" style="color: rgba(255, 255, 255, 1); font-size: 20px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
