@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Style src="project://database/Assets/Game/UI/GameOverScreen.uss" />
+    <ui:VisualElement name="root" style="flex-grow: 1; background-color: rgba(0, 0, 0, 1); padding: 20px; justify-content: space-between; flex-direction: column;">
+        <ui:VisualElement name="header-region" style="flex-grow: 0; height: 100px; justify-content: center; align-items: center; border-bottom-width: 2px; border-bottom-color: rgba(255, 255, 255, 1);">
+            <ui:Label text="GAME OVER" name="game-over-header" style="color: rgba(255, 255, 255, 1); font-size: 32px;" />
+        </ui:VisualElement>
+        <ui:VisualElement name="final-score-region" style="flex-grow: 1; justify-content: center; align-items: center; margin: 20px 0px;">
+            <ui:VisualElement style="flex-direction: column; justify-content: center; align-items: center;">
+                <ui:Label text="FINAL SCORE" style="color: rgba(255, 255, 255, 1); font-size: 20px; margin-bottom: 10px;" />
+                <ui:Label text="0" name="final-score-value" style="color: rgba(255, 255, 255, 1); font-size: 28px; margin-bottom: 20px;" />
+                <ui:Label text="LEVEL" style="color: rgba(255, 255, 255, 1); font-size: 20px; margin-bottom: 10px;" />
+                <ui:Label text="0" name="final-level-value" style="color: rgba(255, 255, 255, 1); font-size: 28px;" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="prompt-region" style="flex-grow: 0; height: 80px; justify-content: center; align-items: center; border-top-width: 2px; border-top-color: rgba(255, 255, 255, 1); flex-direction: column;">
+            <ui:Label text="CONGRATULATIONS! TOP SCORE!" name="top-score-message" style="color: rgba(255, 255, 255, 1); font-size: 20px; display: none;" />
+            <ui:Label text="PRESS ENTER TO CONTINUE" name="continue-prompt" style="color: rgba(255, 255, 255, 1); font-size: 20px; display: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
