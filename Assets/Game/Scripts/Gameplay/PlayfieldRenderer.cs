@@ -78,7 +78,7 @@ namespace Game.Gameplay
                 {
                     GameObject cellObj = new GameObject($"Cell_{col}_{row}");
                     cellObj.transform.SetParent(gridParent);
-                    cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, row * CellSize, 0);
+                    cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, (GridHeight - 1 - row) * CellSize, 0);
 
                     SpriteRenderer spriteRenderer = cellObj.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = _emptyCellSprite;
@@ -100,7 +100,7 @@ namespace Game.Gameplay
                 {
                     GameObject cellObj = new GameObject($"ActiveCell_{col}_{row}");
                     cellObj.transform.SetParent(activePieceParent);
-                    cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, row * CellSize, 0);
+                    cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, (GridHeight - 1 - row) * CellSize, 0);
 
                     SpriteRenderer spriteRenderer = cellObj.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = null;
