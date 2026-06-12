@@ -43,7 +43,7 @@ namespace Tetris.UI
 
         private void OnEnable()
         {
-            var rootElement = GetElement("");
+            var rootElement = DocumentRoot;
             if (rootElement != null)
             {
                 rootElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
@@ -52,7 +52,7 @@ namespace Tetris.UI
 
         private void OnDisable()
         {
-            var rootElement = GetElement("");
+            var rootElement = DocumentRoot;
             if (rootElement != null)
             {
                 rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);

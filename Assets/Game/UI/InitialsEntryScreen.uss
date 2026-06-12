@@ -4,5 +4,6 @@
 #confirm-prompt {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
-    /* TODO: replace with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }

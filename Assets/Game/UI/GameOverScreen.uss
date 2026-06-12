@@ -2,30 +2,35 @@
 
 #game-over-header {
     font-size: 32px;
-    /* TODO: replace with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }
 
 .final-score-widget-header {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
-    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }
 
 .final-score-widget-value {
     font-size: 28px;
     color: rgba(255, 255, 255, 1);
-    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }
 
 #final-score-value,
 #final-level-value {
     font-size: 28px;
     color: rgba(255, 255, 255, 1);
-    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }
 
 #top-score-message,
 #continue-prompt {
     font-size: 20px;
-    /* TODO: replace with Press Start 2P TMP font asset when available */
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    /* TODO: swap for game-specific font when available */
 }

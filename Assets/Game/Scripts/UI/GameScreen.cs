@@ -11,7 +11,7 @@ namespace Tetris.UI
         protected override void Awake()
         {
             base.Awake();
-            var rootElement = GetElement("");
+            var rootElement = GetElement("root");
             _scoreWidget = new ScoreWidget(rootElement);
             _levelWidget = new LevelWidget(rootElement);
             _linesWidget = new LinesWidget(rootElement);

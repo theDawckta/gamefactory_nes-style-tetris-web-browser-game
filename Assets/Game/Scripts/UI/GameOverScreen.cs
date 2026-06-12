@@ -22,7 +22,7 @@ namespace Tetris.UI
             base.Awake();
 
             _headerText = GetElement("game-over-header") as Label;
-            var rootElement = GetElement("");
+            var rootElement = DocumentRoot;
             _finalScoreWidget = new FinalScoreWidget(rootElement);
             _topScoreMessageText = GetElement("top-score-message") as Label;
             _continuePromptText = GetElement("continue-prompt") as Label;
@@ -30,7 +30,7 @@ namespace Tetris.UI
 
         private void OnEnable()
         {
-            var rootElement = GetElement("");
+            var rootElement = DocumentRoot;
             if (rootElement != null)
             {
                 rootElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
@@ -39,7 +39,7 @@ namespace Tetris.UI
 
         private void OnDisable()
         {
-            var rootElement = GetElement("");
+            var rootElement = DocumentRoot;
             if (rootElement != null)
             {
                 rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);
