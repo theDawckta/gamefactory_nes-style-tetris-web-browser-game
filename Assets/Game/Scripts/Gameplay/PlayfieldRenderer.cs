@@ -36,9 +36,20 @@ namespace Game.Gameplay
         private SpriteRenderer[,] _activePieceRenderers = new SpriteRenderer[GridWidth, GridHeight];
         private SpriteRenderer _borderRenderer;
 
+        private bool _initialized;
+
         private void OnEnable()
         {
+            EnsureInitialized();
+        }
+
+        private void EnsureInitialized()
+        {
+            if (_initialized)
+                return;
+
             InitializeGrid();
+            _initialized = true;
         }
 
         private void InitializeGrid()
@@ -105,6 +116,8 @@ namespace Game.Gameplay
 
         public void RenderGrid(PlayfieldModel model)
         {
+            EnsureInitialized();
+
             for (int row = 0; row < GridHeight; row++)
             {
                 for (int col = 0; col < GridWidth; col++)
@@ -132,6 +145,8 @@ namespace Game.Gameplay
 
         public void RenderActivePiece(int[,] rotationState, int pivotCol, int pivotRow, int colorIndex)
         {
+            EnsureInitialized();
+
             // Clear all active piece renderers first
             for (int row = 0; row < GridHeight; row++)
             {
@@ -171,6 +186,8 @@ namespace Game.Gameplay
 
         public void SetRowColor(int row, Color color)
         {
+            EnsureInitialized();
+
             if (row >= 0 && row < GridHeight)
             {
                 for (int col = 0; col < GridWidth; col++)
@@ -182,6 +199,8 @@ namespace Game.Gameplay
 
         public void ClearActivePiece()
         {
+            EnsureInitialized();
+
             for (int row = 0; row < GridHeight; row++)
             {
                 for (int col = 0; col < GridWidth; col++)
