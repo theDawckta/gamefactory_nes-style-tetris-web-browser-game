@@ -4,6 +4,6 @@
 #confirm-prompt {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }

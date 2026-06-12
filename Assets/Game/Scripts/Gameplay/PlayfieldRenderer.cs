@@ -36,11 +36,24 @@ namespace Game.Gameplay
         private SpriteRenderer[,] _activePieceRenderers = new SpriteRenderer[GridWidth, GridHeight];
         private SpriteRenderer _borderRenderer;
 
+        private Sprite _fallbackSprite;
         private bool _initialized;
 
         private void OnEnable()
         {
             EnsureInitialized();
+        }
+
+        private Sprite GetFallbackSprite()
+        {
+            if (_fallbackSprite != null)
+                return _fallbackSprite;
+
+            Texture2D tex = new Texture2D(1, 1);
+            tex.SetPixel(0, 0, Color.white);
+            tex.Apply();
+            _fallbackSprite = Sprite.Create(tex, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f), 1f);
+            return _fallbackSprite;
         }
 
         private void EnsureInitialized()
@@ -133,10 +146,10 @@ namespace Game.Gameplay
                     else if (colorIndex > 0 && colorIndex <= 7)
                     {
                         int spriteIndex = colorIndex - 1;
-                        if (spriteIndex < _cellSprites.Length && _cellSprites[spriteIndex] != null)
-                        {
-                            renderer.sprite = _cellSprites[spriteIndex];
-                        }
+                        Sprite cellSprite = (spriteIndex < _cellSprites.Length && _cellSprites[spriteIndex] != null)
+                            ? _cellSprites[spriteIndex]
+                            : GetFallbackSprite();
+                        renderer.sprite = cellSprite;
                         renderer.color = _cellColors[spriteIndex];
                     }
                 }
@@ -173,10 +186,10 @@ namespace Game.Gameplay
                         if (gridCol >= 0 && gridCol < GridWidth && gridRow >= 0 && gridRow < GridHeight)
                         {
                             SpriteRenderer renderer = _activePieceRenderers[gridCol, gridRow];
-                            if (spriteIndex < _cellSprites.Length && _cellSprites[spriteIndex] != null)
-                            {
-                                renderer.sprite = _cellSprites[spriteIndex];
-                            }
+                            Sprite cellSprite = (spriteIndex < _cellSprites.Length && _cellSprites[spriteIndex] != null)
+                                ? _cellSprites[spriteIndex]
+                                : GetFallbackSprite();
+                            renderer.sprite = cellSprite;
                             renderer.color = _cellColors[spriteIndex];
                         }
                     }

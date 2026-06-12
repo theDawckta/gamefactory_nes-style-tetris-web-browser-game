@@ -13,7 +13,7 @@
     font-size: 16px;
     color: rgba(255, 255, 255, 1);
     white-space: nowrap;
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }
 
@@ -38,6 +38,6 @@
     color: rgba(255, 255, 255, 1);
     justify-content: center;
     align-items: center;
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }

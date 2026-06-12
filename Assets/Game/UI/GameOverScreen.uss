@@ -2,21 +2,21 @@
 
 #game-over-header {
     font-size: 32px;
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }
 
 .final-score-widget-header {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }
 
 .final-score-widget-value {
     font-size: 28px;
     color: rgba(255, 255, 255, 1);
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }
 
@@ -24,13 +24,13 @@
 #final-level-value {
     font-size: 28px;
     color: rgba(255, 255, 255, 1);
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }
 
 #top-score-message,
 #continue-prompt {
     font-size: 20px;
-    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.asset');
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
     /* TODO: swap for game-specific font when available */
 }

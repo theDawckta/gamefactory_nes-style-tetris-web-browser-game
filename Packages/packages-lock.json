@@ -4,7 +4,9 @@
       "version": "https://github.com/theDawckta/ai-game-factory.git?path=/CoreAssets",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.textmeshpro": "4.0.0"
+      },
       "hash": "4a51b73449c0ca4704e0dc5f1836788e3fe3c6b9"
     },
     "com.onetimegames.coresystems": {
@@ -37,6 +39,23 @@
         "com.unity.ext.nunit": "2.0.3",
         "com.unity.modules.imgui": "1.0.0",
         "com.unity.modules.jsonserialize": "1.0.0"
+      }
+    },
+    "com.unity.textmeshpro": {
+      "version": "5.0.0",
+      "depth": 1,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.ugui": "2.0.0"
+      }
+    },
+    "com.unity.ugui": {
+      "version": "2.0.0",
+      "depth": 2,
+      "source": "builtin",
+      "dependencies": {
+        "com.unity.modules.ui": "1.0.0",
+        "com.unity.modules.imgui": "1.0.0"
       }
     },
     "com.unity.modules.hierarchycore": {

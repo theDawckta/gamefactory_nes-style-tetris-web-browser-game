@@ -16,11 +16,11 @@ namespace Tetris.UI
 
         public virtual void Show()
         {
+            gameObject.SetActive(true);
             if (_document != null && _document.rootVisualElement != null)
             {
                 _document.rootVisualElement.style.display = DisplayStyle.Flex;
             }
-            gameObject.SetActive(true);
         }
 
         public virtual void Hide()
