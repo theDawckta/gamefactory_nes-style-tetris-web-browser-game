@@ -5,14 +5,14 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "87dbedb2705e5403c60cee8fd32ffccd2cee256f"
+      "hash": "77ee83f7cf1407283e822ea5c5640fd001b3d51a"
     },
     "com.onetimegames.coresystems": {
       "version": "https://github.com/theDawckta/ai-game-factory.git?path=/CoreSystems",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "87dbedb2705e5403c60cee8fd32ffccd2cee256f"
+      "hash": "77ee83f7cf1407283e822ea5c5640fd001b3d51a"
     },
     "com.unity.ext.nunit": {
       "version": "2.0.5",

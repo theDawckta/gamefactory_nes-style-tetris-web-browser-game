@@ -57,7 +57,7 @@ namespace Tetris.Data
 
         private static void InitializePieces()
         {
-            // I Piece (Cyan) - Color Index 0
+            // I Piece (Cyan) - Color Index 1
             PieceDataMap[PieceType.I] = new PieceData(
                 PieceType.I,
                 new[]
@@ -91,10 +91,10 @@ namespace Tetris.Data
                         { false, false, true,  false }
                     })
                 },
-                0
+                1
             );
 
-            // O Piece (Yellow) - Color Index 1
+            // O Piece (Yellow) - Color Index 2
             PieceDataMap[PieceType.O] = new PieceData(
                 PieceType.O,
                 new[]
@@ -128,10 +128,10 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                1
+                2
             );
 
-            // T Piece (Purple) - Color Index 2
+            // T Piece (Purple) - Color Index 3
             PieceDataMap[PieceType.T] = new PieceData(
                 PieceType.T,
                 new[]
@@ -165,10 +165,10 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                2
+                3
             );
 
-            // S Piece (Green) - Color Index 3
+            // S Piece (Green) - Color Index 4
             PieceDataMap[PieceType.S] = new PieceData(
                 PieceType.S,
                 new[]
@@ -202,10 +202,10 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                3
+                4
             );
 
-            // Z Piece (Red) - Color Index 4
+            // Z Piece (Red) - Color Index 5
             PieceDataMap[PieceType.Z] = new PieceData(
                 PieceType.Z,
                 new[]
@@ -239,10 +239,10 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                4
+                5
             );
 
-            // J Piece (Blue) - Color Index 5
+            // J Piece (Blue) - Color Index 6
             PieceDataMap[PieceType.J] = new PieceData(
                 PieceType.J,
                 new[]
@@ -276,10 +276,10 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                5
+                6
             );
 
-            // L Piece (Orange) - Color Index 6
+            // L Piece (Orange) - Color Index 7
             PieceDataMap[PieceType.L] = new PieceData(
                 PieceType.L,
                 new[]
@@ -313,7 +313,7 @@ namespace Tetris.Data
                         { false, false, false, false }
                     })
                 },
-                6
+                7
             );
         }
 

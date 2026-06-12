@@ -22,6 +22,7 @@ namespace Game.Gameplay
 
         private bool _isPlaying;
         private bool _isInLockDelay;
+        private bool _isInLineClearAnimation;
 
         public delegate void GameOverEventHandler();
         public delegate void ScoreChangedEventHandler(int score, int level, int lines);
@@ -39,7 +40,9 @@ namespace Game.Gameplay
             _scoring.Reset();
             _isPlaying = true;
             _isInLockDelay = false;
+            _isInLineClearAnimation = false;
 
+            _renderer?.RenderGrid(_playfield);
             SpawnNextPiece();
         }
 
@@ -127,6 +130,14 @@ namespace Game.Gameplay
             {
                 LockPiece();
             }
+
+            // Render active piece each frame (skip during line clear animation)
+            if (_isPlaying && !_isInLineClearAnimation)
+            {
+                PieceData activePieceData = TetrominoData.GetPieceData(_currentPieceType);
+                int[,] activeState = ConvertRotationState(activePieceData.GetRotationState(_currentRotation).Grid);
+                _renderer?.RenderActivePiece(activeState, _currentCol, _currentRow, activePieceData.ColorIndex);
+            }
         }
 
         private void LockPiece()
@@ -137,10 +148,14 @@ namespace Game.Gameplay
             _playfield.LockPiece(rotationState, _currentCol, _currentRow, pieceData.ColorIndex);
             _isInLockDelay = false;
 
+            _renderer?.ClearActivePiece();
+            _renderer?.RenderGrid(_playfield);
+
             int linesCleared = _playfield.ClearFullLines();
 
             if (linesCleared > 0)
             {
+                _isInLineClearAnimation = true;
                 StartCoroutine(LineCleanAnimationCoroutine(linesCleared));
             }
             else
@@ -161,11 +176,13 @@ namespace Game.Gameplay
             _scoring.AddLines(linesCleared);
             OnScoreChanged?.Invoke(_scoring.Score, _scoring.Level, _scoring.TotalLines);
 
+            _renderer?.RenderGrid(_playfield);
             SpawnNextPiece();
         }
 
         private void SpawnNextPiece()
         {
+            _isInLineClearAnimation = false;
             PieceType newType = (PieceType)Random.Range(0, 7);
             PieceData pieceData = TetrominoData.GetPieceData(newType);
 
