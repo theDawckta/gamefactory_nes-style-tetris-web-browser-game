@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Tetris.Services;
 
@@ -35,20 +36,15 @@ namespace Tetris.UI
             _onScoresFetched = OnScoresFetched;
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            DocumentRoot?.RegisterCallback<KeyDownEvent>(OnKeyDown);
-        }
-
-        private void OnDisable()
-        {
-            DocumentRoot?.UnregisterCallback<KeyDownEvent>(OnKeyDown);
+            if (Keyboard.current.enterKey.wasPressedThisFrame || Keyboard.current.spaceKey.wasPressedThisFrame)
+                OnStartPressed?.Invoke();
         }
 
         public override void Show()
         {
             base.Show();
-            DocumentRoot?.Focus();
             FetchAndDisplayScores();
             StartBlinking();
         }
@@ -74,20 +70,19 @@ namespace Tetris.UI
 
             if (scores == null || scores.Count == 0)
             {
-                _leaderboardWidget?.Populate(new List<LeaderboardEntry>());
+                var placeholder = new List<LeaderboardEntry>
+                {
+                    new LeaderboardEntry { rank = 1, initials = "AAA", score = 9999 },
+                    new LeaderboardEntry { rank = 2, initials = "BBB", score = 8888 },
+                    new LeaderboardEntry { rank = 3, initials = "CCC", score = 7777 },
+                    new LeaderboardEntry { rank = 4, initials = "DDD", score = 6666 },
+                    new LeaderboardEntry { rank = 5, initials = "EEE", score = 5555 },
+                };
+                _leaderboardWidget?.Populate(placeholder);
                 return;
             }
 
             _leaderboardWidget?.Populate(scores);
-        }
-
-        private void OnKeyDown(KeyDownEvent evt)
-        {
-            if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.Space)
-            {
-                OnStartPressed?.Invoke();
-                evt.StopPropagation();
-            }
         }
 
         private void StartBlinking()

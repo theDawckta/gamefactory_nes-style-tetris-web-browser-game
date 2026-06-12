@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Tetris.Services;
 
@@ -41,27 +42,14 @@ namespace Tetris.UI
             ResetSlotState();
         }
 
-        private void OnEnable()
-        {
-            var rootElement = DocumentRoot;
-            if (rootElement != null)
-            {
-                rootElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
-            }
-        }
-
-        private void OnDisable()
-        {
-            var rootElement = DocumentRoot;
-            if (rootElement != null)
-            {
-                rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);
-            }
-        }
-
         private void Update()
         {
             _characterSlotsWidget?.Update();
+
+            if (Keyboard.current.leftArrowKey.wasPressedThisFrame)       CycleCharacterPrevious();
+            else if (Keyboard.current.rightArrowKey.wasPressedThisFrame) CycleCharacterNext();
+            else if (Keyboard.current.upArrowKey.wasPressedThisFrame)    DeleteCurrentCharacter();
+            else if (Keyboard.current.downArrowKey.wasPressedThisFrame)  ConfirmCharacterAndAdvance();
         }
 
         public void Show(int score)
@@ -90,30 +78,6 @@ namespace Tetris.UI
             }
             _activeSlot = 0;
             _characterSlotsWidget?.Reset();
-        }
-
-        private void OnKeyDown(KeyDownEvent evt)
-        {
-            if (evt.keyCode == KeyCode.LeftArrow)
-            {
-                CycleCharacterPrevious();
-                evt.StopPropagation();
-            }
-            else if (evt.keyCode == KeyCode.RightArrow)
-            {
-                CycleCharacterNext();
-                evt.StopPropagation();
-            }
-            else if (evt.keyCode == KeyCode.UpArrow)
-            {
-                DeleteCurrentCharacter();
-                evt.StopPropagation();
-            }
-            else if (evt.keyCode == KeyCode.DownArrow)
-            {
-                ConfirmCharacterAndAdvance();
-                evt.StopPropagation();
-            }
         }
 
         private void CycleCharacterNext()

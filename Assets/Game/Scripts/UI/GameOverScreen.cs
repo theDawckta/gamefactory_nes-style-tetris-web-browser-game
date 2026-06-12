@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using Tetris.Services;
 
@@ -28,22 +29,10 @@ namespace Tetris.UI
             _continuePromptText = GetElement("continue-prompt") as Label;
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            var rootElement = DocumentRoot;
-            if (rootElement != null)
-            {
-                rootElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
-            }
-        }
-
-        private void OnDisable()
-        {
-            var rootElement = DocumentRoot;
-            if (rootElement != null)
-            {
-                rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);
-            }
+            if (Keyboard.current.enterKey.wasPressedThisFrame)
+                OnContinuePressed?.Invoke();
         }
 
         public void Show(int finalScore, int finalLevel, List<LeaderboardEntry> currentLeaderboard)
@@ -93,13 +82,5 @@ namespace Tetris.UI
             return finalScore > leaderboard[leaderboard.Count - 1].score;
         }
 
-        private void OnKeyDown(KeyDownEvent evt)
-        {
-            if (evt.keyCode == KeyCode.Return)
-            {
-                OnContinuePressed?.Invoke();
-                evt.StopPropagation();
-            }
-        }
     }
 }
