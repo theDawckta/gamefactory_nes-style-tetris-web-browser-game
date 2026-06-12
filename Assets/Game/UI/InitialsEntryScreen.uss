@@ -4,6 +4,5 @@
 #confirm-prompt {
     font-size: 20px;
     color: rgba(255, 255, 255, 1);
-    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
-    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+    /* TODO: replace with Press Start 2P TMP font asset when available */
 }

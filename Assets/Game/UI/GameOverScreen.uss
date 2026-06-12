@@ -2,8 +2,7 @@
 
 #game-over-header {
     font-size: 32px;
-    /* TODO: replace -unity-font with Press Start 2P TMP font asset when available */
-    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+    /* TODO: replace with Press Start 2P TMP font asset when available */
 }
 
 .final-score-widget-header {
@@ -28,5 +27,5 @@
 #top-score-message,
 #continue-prompt {
     font-size: 20px;
-    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+    /* TODO: replace with Press Start 2P TMP font asset when available */
 }

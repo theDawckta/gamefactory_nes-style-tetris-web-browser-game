@@ -1,10 +1,9 @@
 #title-logo {
     background-image: url('project://database/Assets/Game/Sprites/TitleLogo/TitleLogo.png');
-    image-rendering: pixelated;
     -unity-background-scale-mode: scale-to-fit;
 }
 
 .start-prompt-text {
     font-size: 20px;
-    -unity-font: resource('Fonts & Materials/LegacyRuntime');
+    /* TODO: replace with Press Start 2P TMP font asset when available */
 }

@@ -23,7 +23,7 @@ namespace Tetris.UI
         {
             base.Awake();
 
-            var rootElement = GetElement("");
+            var rootElement = GetElement("root");
             _leaderboardWidget = new LeaderboardWidget(rootElement);
             _startPromptText = GetElement("start-prompt-text") as Label;
 
@@ -37,25 +37,18 @@ namespace Tetris.UI
 
         private void OnEnable()
         {
-            var rootElement = GetElement("");
-            if (rootElement != null)
-            {
-                rootElement.RegisterCallback<KeyDownEvent>(OnKeyDown);
-            }
+            DocumentRoot?.RegisterCallback<KeyDownEvent>(OnKeyDown);
         }
 
         private void OnDisable()
         {
-            var rootElement = GetElement("");
-            if (rootElement != null)
-            {
-                rootElement.UnregisterCallback<KeyDownEvent>(OnKeyDown);
-            }
+            DocumentRoot?.UnregisterCallback<KeyDownEvent>(OnKeyDown);
         }
 
         public override void Show()
         {
             base.Show();
+            DocumentRoot?.Focus();
             FetchAndDisplayScores();
             StartBlinking();
         }

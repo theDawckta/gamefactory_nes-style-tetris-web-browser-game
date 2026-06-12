@@ -7,6 +7,8 @@ namespace Tetris.UI
     {
         private UIDocument _document;
 
+        protected VisualElement DocumentRoot => _document?.rootVisualElement;
+
         protected virtual void Awake()
         {
             _document = GetComponent<UIDocument>();
