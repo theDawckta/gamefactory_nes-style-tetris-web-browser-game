@@ -209,7 +209,7 @@ namespace Tetris.UI
             string initials = GetInitialsString();
 
             if (_leaderboardService == null)
-                _leaderboardService = FindFirstObjectByType<LeaderboardService>();
+                _leaderboardService = FindAnyObjectByType<LeaderboardService>();
 
             if (_leaderboardService != null)
             {
