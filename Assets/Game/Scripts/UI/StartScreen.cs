@@ -72,11 +72,11 @@ namespace Tetris.UI
             {
                 var placeholder = new List<LeaderboardEntry>
                 {
-                    new LeaderboardEntry { rank = 1, initials = "AAA", score = 9999 },
-                    new LeaderboardEntry { rank = 2, initials = "BBB", score = 8888 },
-                    new LeaderboardEntry { rank = 3, initials = "CCC", score = 7777 },
-                    new LeaderboardEntry { rank = 4, initials = "DDD", score = 6666 },
-                    new LeaderboardEntry { rank = 5, initials = "EEE", score = 5555 },
+                    new LeaderboardEntry { rank = 1, initials = "---", score = 0 },
+                    new LeaderboardEntry { rank = 2, initials = "---", score = 0 },
+                    new LeaderboardEntry { rank = 3, initials = "---", score = 0 },
+                    new LeaderboardEntry { rank = 4, initials = "---", score = 0 },
+                    new LeaderboardEntry { rank = 5, initials = "---", score = 0 },
                 };
                 _leaderboardWidget?.Populate(placeholder);
                 return;

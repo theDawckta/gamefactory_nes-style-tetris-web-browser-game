@@ -25,6 +25,7 @@ namespace Tetris.Services
             string url = $"{_serverBaseUrl}/scores";
             using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
+                request.timeout = 5;
                 yield return request.SendWebRequest();
 
                 if (request.result == UnityWebRequest.Result.Success)
@@ -61,6 +62,7 @@ namespace Tetris.Services
                 request.uploadHandler = new UploadHandlerRaw(bodyRaw);
                 request.downloadHandler = new DownloadHandlerBuffer();
                 request.SetRequestHeader("Content-Type", "application/json");
+                request.timeout = 5;
 
                 yield return request.SendWebRequest();
 

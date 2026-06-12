@@ -1,6 +1,6 @@
 #root {
     flex-grow: 1;
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 #playfield-region {
@@ -17,58 +17,86 @@
     background-color: rgba(0, 0, 0, 1);
 }
 
+.next-piece-region {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.next-header {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
+    margin-bottom: 8px;
+}
+
+.next-piece-grid {
+    flex-direction: column;
+}
+
+.next-piece-row {
+    flex-direction: row;
+}
+
+.next-piece-cell {
+    width: 22px;
+    height: 22px;
+    margin: 1px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
 .score-widget {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .score-widget-header {
-    font-size: 12px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 1);
     -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
-    /* TODO: swap for game-specific font when available */
 }
 
 .score-widget-value {
-    font-size: 20px;
+    font-size: 32px;
     color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
 }
 
 .level-widget {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .level-widget-header {
-    font-size: 12px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 1);
     -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
-    /* TODO: swap for game-specific font when available */
 }
 
 .level-widget-value {
-    font-size: 20px;
+    font-size: 32px;
     color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
 }
 
 .lines-widget {
     flex-direction: column;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
 }
 
 .lines-widget-header {
-    font-size: 12px;
+    font-size: 18px;
     color: rgba(255, 255, 255, 1);
     -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
-    /* TODO: swap for game-specific font when available */
 }
 
 .lines-widget-value {
-    font-size: 20px;
+    font-size: 32px;
     color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
 }
 
 #pause-overlay-region {

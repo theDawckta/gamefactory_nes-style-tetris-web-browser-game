@@ -7,6 +7,7 @@ namespace Game.Gameplay
         private const int GridWidth = 10;
         private const int GridHeight = 20;
         private const float CellSize = 1f;
+        private const float CellRenderScale = 0.91f;
 
         [SerializeField]
         private Vector3 _gridOrigin = Vector3.zero;
@@ -79,6 +80,7 @@ namespace Game.Gameplay
                     GameObject cellObj = new GameObject($"Cell_{col}_{row}");
                     cellObj.transform.SetParent(gridParent);
                     cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, (GridHeight - 1 - row) * CellSize, 0);
+                    cellObj.transform.localScale = new Vector3(CellRenderScale, CellRenderScale, 1f);
 
                     SpriteRenderer spriteRenderer = cellObj.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = _emptyCellSprite;
@@ -101,6 +103,7 @@ namespace Game.Gameplay
                     GameObject cellObj = new GameObject($"ActiveCell_{col}_{row}");
                     cellObj.transform.SetParent(activePieceParent);
                     cellObj.transform.localPosition = _gridOrigin + new Vector3(col * CellSize, (GridHeight - 1 - row) * CellSize, 0);
+                    cellObj.transform.localScale = new Vector3(CellRenderScale, CellRenderScale, 1f);
 
                     SpriteRenderer spriteRenderer = cellObj.AddComponent<SpriteRenderer>();
                     spriteRenderer.sprite = null;
@@ -111,20 +114,30 @@ namespace Game.Gameplay
                 }
             }
 
-            // Create border renderer
-            GameObject borderObj = new GameObject("Border");
-            borderObj.transform.SetParent(transform);
-            borderObj.transform.localPosition = Vector3.zero;
+            // Create border (4 segments around the playfield)
+            const float borderThickness = 0.3f;
+            float gridLeft   = _gridOrigin.x - CellSize * 0.5f;
+            float gridRight  = _gridOrigin.x + GridWidth  * CellSize - CellSize * 0.5f;
+            float gridBottom = _gridOrigin.y - CellSize * 0.5f;
+            float gridTop    = _gridOrigin.y + GridHeight * CellSize - CellSize * 0.5f;
+            Color borderColor = new Color(0.85f, 0.85f, 0.85f, 1f);
 
-            _borderRenderer = borderObj.AddComponent<SpriteRenderer>();
-            _borderRenderer.sprite = _borderSprite;
-            _borderRenderer.color = Color.white;
-            _borderRenderer.sortingOrder = -1;
+            Transform borderParent = new GameObject("Border").transform;
+            borderParent.SetParent(transform);
+            borderParent.localPosition = Vector3.zero;
 
-            // Position border at center of grid
-            float gridCenterX = _gridOrigin.x + (GridWidth * CellSize) / 2f - CellSize / 2f;
-            float gridCenterY = _gridOrigin.y + (GridHeight * CellSize) / 2f - CellSize / 2f;
-            borderObj.transform.localPosition = new Vector3(gridCenterX, gridCenterY, 0.1f);
+            CreateBorderSegment(borderParent, "Left",
+                new Vector3(gridLeft - borderThickness * 0.5f, (gridBottom + gridTop) * 0.5f, 0f),
+                new Vector3(borderThickness, GridHeight * CellSize + borderThickness * 2f, 1f), borderColor);
+            CreateBorderSegment(borderParent, "Right",
+                new Vector3(gridRight + borderThickness * 0.5f, (gridBottom + gridTop) * 0.5f, 0f),
+                new Vector3(borderThickness, GridHeight * CellSize + borderThickness * 2f, 1f), borderColor);
+            CreateBorderSegment(borderParent, "Bottom",
+                new Vector3((gridLeft + gridRight) * 0.5f, gridBottom - borderThickness * 0.5f, 0f),
+                new Vector3(GridWidth * CellSize, borderThickness, 1f), borderColor);
+            CreateBorderSegment(borderParent, "Top",
+                new Vector3((gridLeft + gridRight) * 0.5f, gridTop + borderThickness * 0.5f, 0f),
+                new Vector3(GridWidth * CellSize, borderThickness, 1f), borderColor);
         }
 
         public void RenderGrid(PlayfieldModel model)
@@ -208,6 +221,18 @@ namespace Game.Gameplay
                     _gridRenderers[col, row].color = color;
                 }
             }
+        }
+
+        private void CreateBorderSegment(Transform parent, string segmentName, Vector3 localPos, Vector3 scale, Color color)
+        {
+            GameObject obj = new GameObject(segmentName);
+            obj.transform.SetParent(parent);
+            obj.transform.localPosition = localPos;
+            obj.transform.localScale = scale;
+            SpriteRenderer sr = obj.AddComponent<SpriteRenderer>();
+            sr.sprite = GetFallbackSprite();
+            sr.color = color;
+            sr.sortingOrder = -1;
         }
 
         public void ClearActivePiece()

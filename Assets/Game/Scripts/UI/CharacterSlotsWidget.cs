@@ -45,23 +45,30 @@ namespace Tetris.UI
                 slotContainer.style.justifyContent = Justify.Center;
                 slotContainer.style.alignItems = Align.Center;
                 slotContainer.style.width = new Length(60, LengthUnit.Pixel);
-                slotContainer.style.height = new Length(80, LengthUnit.Pixel);
+                slotContainer.style.height = new Length(100, LengthUnit.Pixel);
                 slotContainer.style.marginLeft = new Length(10, LengthUnit.Pixel);
                 slotContainer.style.marginRight = new Length(10, LengthUnit.Pixel);
 
                 var characterLabel = new Label("_");
                 characterLabel.name = $"character-label-{i}";
+                characterLabel.AddToClassList("character-slot-label");
                 characterLabel.style.fontSize = 48;
                 characterLabel.style.color = new Color(1f, 1f, 1f, 1f);
-                characterLabel.style.unityFontStyleAndWeight = FontStyle.Bold;
                 slotContainer.Add(characterLabel);
 
-                var cursorLabel = new Label("_");
+                var underline = new VisualElement();
+                underline.style.width = new Length(44, LengthUnit.Pixel);
+                underline.style.height = new Length(3, LengthUnit.Pixel);
+                underline.style.backgroundColor = new Color(1f, 1f, 1f, 1f);
+                underline.style.marginTop = new Length(4, LengthUnit.Pixel);
+                slotContainer.Add(underline);
+
+                var cursorLabel = new Label("▲");
                 cursorLabel.name = $"cursor-label-{i}";
+                cursorLabel.AddToClassList("character-cursor-label");
                 cursorLabel.style.fontSize = 16;
-                cursorLabel.style.color = new Color(1f, 1f, 1f, 1f);
-                cursorLabel.style.marginTop = new Length(-8, LengthUnit.Pixel);
-                cursorLabel.style.display = DisplayStyle.None;
+                cursorLabel.style.color = new Color(1f, 1f, 1f, 0f);
+                cursorLabel.style.marginTop = new Length(4, LengthUnit.Pixel);
                 slotContainer.Add(cursorLabel);
 
                 slotsContainer.Add(slotContainer);
@@ -160,14 +167,8 @@ namespace Tetris.UI
             else
                 slotLabel.text = displayChar.ToString();
 
-            if (slotIndex == _activeSlot && !_slotConfirmed[slotIndex])
-            {
-                cursorLabel.style.display = _cursorVisible ? DisplayStyle.Flex : DisplayStyle.None;
-            }
-            else
-            {
-                cursorLabel.style.display = DisplayStyle.None;
-            }
+            bool showCursor = slotIndex == _activeSlot && !_slotConfirmed[slotIndex] && _cursorVisible;
+            cursorLabel.style.color = showCursor ? new Color(1f, 1f, 1f, 1f) : new Color(1f, 1f, 1f, 0f);
 
             var color = _slotConfirmed[slotIndex] ? new Color(1f, 1f, 1f, 1f) : new Color(0.7f, 0.7f, 0.7f, 1f);
             slotLabel.style.color = color;

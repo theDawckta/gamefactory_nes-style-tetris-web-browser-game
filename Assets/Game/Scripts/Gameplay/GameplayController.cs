@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game.Gameplay;
@@ -16,6 +17,8 @@ namespace Game.Gameplay
         private ScoringSystem _scoring = new ScoringSystem();
 
         private PieceType _currentPieceType;
+        private PieceType _nextPieceType;
+        private PieceType _previousPieceType = (PieceType)7;
         private int _currentRotation;
         private int _currentCol;
         private int _currentRow;
@@ -29,11 +32,18 @@ namespace Game.Gameplay
 
         public event GameOverEventHandler OnGameOver;
         public event ScoreChangedEventHandler OnScoreChanged;
+        public event Action<PieceType> OnNextPieceChanged;
 
         private const int LineClearAnimationFrames = 30;
 
+        private void Start()
+        {
+            _renderer?.gameObject.SetActive(false);
+        }
+
         public void StartGame()
         {
+            _renderer?.gameObject.SetActive(true);
             _playfield.Reset();
             _gravity.SetLevel(0);
             _das.Reset();
@@ -41,6 +51,8 @@ namespace Game.Gameplay
             _isPlaying = true;
             _isInLockDelay = false;
             _isInLineClearAnimation = false;
+            _previousPieceType = (PieceType)7;
+            _nextPieceType = NesRandomPiece();
 
             _renderer?.RenderGrid(_playfield);
             SpawnNextPiece();
@@ -50,6 +62,7 @@ namespace Game.Gameplay
         {
             _isPlaying = false;
             StopAllCoroutines();
+            _renderer?.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -61,7 +74,7 @@ namespace Game.Gameplay
             bool leftHeld = Keyboard.current.leftArrowKey.isPressed;
             bool rightHeld = Keyboard.current.rightArrowKey.isPressed;
             bool downHeld = Keyboard.current.downArrowKey.isPressed;
-            bool rotatePressed = Keyboard.current.zKey.wasPressedThisFrame;
+            bool rotatePressed = Keyboard.current.zKey.wasPressedThisFrame || Keyboard.current.upArrowKey.wasPressedThisFrame;
 
             _das.Update(leftHeld, rightHeld);
 
@@ -79,16 +92,33 @@ namespace Game.Gameplay
                 }
             }
 
-            // Apply rotation
+            // Apply rotation with wall kicks
             if (rotatePressed)
             {
                 PieceData pieceData = TetrominoData.GetPieceData(_currentPieceType);
                 int nextRotation = (_currentRotation + 1) % pieceData.RotationTable.Length;
                 int[,] nextRotationState = ConvertRotationState(pieceData.GetRotationState(nextRotation).Grid);
 
-                if (_playfield.IsValidPosition(nextRotationState, _currentCol, _currentRow))
+                foreach (int kick in new[] { 0, -1, 1, -2, 2 })
                 {
-                    _currentRotation = nextRotation;
+                    if (_playfield.IsValidPosition(nextRotationState, _currentCol + kick, _currentRow))
+                    {
+                        _currentCol += kick;
+                        _currentRotation = nextRotation;
+                        break;
+                    }
+                }
+            }
+
+            // If in lock delay but piece can now fall (after a move/rotation), cancel the lock delay
+            if (_isInLockDelay)
+            {
+                PieceData pieceData = TetrominoData.GetPieceData(_currentPieceType);
+                int[,] rotationState = ConvertRotationState(pieceData.GetRotationState(_currentRotation).Grid);
+                if (_playfield.IsValidPosition(rotationState, _currentCol, _currentRow + 1))
+                {
+                    _isInLockDelay = false;
+                    _gravity.ResetLockDelay();
                 }
             }
 
@@ -101,8 +131,6 @@ namespace Game.Gameplay
                 if (_playfield.IsValidPosition(rotationState, _currentCol, _currentRow + 1))
                 {
                     _currentRow++;
-                    _scoring.AddSoftDropScore(1);
-                    OnScoreChanged?.Invoke(_scoring.Score, _scoring.Level, _scoring.TotalLines);
                     _gravity.ResetDropTimer();
                 }
             }
@@ -174,6 +202,7 @@ namespace Game.Gameplay
             }
 
             _scoring.AddLines(linesCleared);
+            _gravity.SetLevel(_scoring.Level);
             OnScoreChanged?.Invoke(_scoring.Score, _scoring.Level, _scoring.TotalLines);
 
             _renderer?.RenderGrid(_playfield);
@@ -183,10 +212,13 @@ namespace Game.Gameplay
         private void SpawnNextPiece()
         {
             _isInLineClearAnimation = false;
-            PieceType newType = (PieceType)Random.Range(0, 7);
+            PieceType newType = _nextPieceType;
             PieceData pieceData = TetrominoData.GetPieceData(newType);
 
+            _previousPieceType = newType;
             _currentPieceType = newType;
+            _nextPieceType = NesRandomPiece();
+            OnNextPieceChanged?.Invoke(_nextPieceType);
             _currentRotation = 0;
             _currentCol = pieceData.SpawnColumn;
             _currentRow = pieceData.SpawnRow;
@@ -202,6 +234,14 @@ namespace Game.Gameplay
 
             _gravity.ResetDropTimer();
             _gravity.ResetLockDelay();
+        }
+
+        private PieceType NesRandomPiece()
+        {
+            int roll = UnityEngine.Random.Range(0, 8);
+            if (roll == (int)_previousPieceType || roll == 7)
+                roll = UnityEngine.Random.Range(0, 7);
+            return (PieceType)roll;
         }
 
         private int[,] ConvertRotationState(bool[,] boolGrid)

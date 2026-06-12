@@ -2,8 +2,19 @@
 
 #prompt-text,
 #confirm-prompt {
-    font-size: 20px;
+    font-size: 24px;
     color: rgba(255, 255, 255, 1);
     -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
-    /* TODO: swap for game-specific font when available */
+}
+
+.character-slot-label {
+    font-size: 48px;
+    color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
+}
+
+.character-cursor-label {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 1);
+    -unity-font-definition: url('project://database/Packages/com.onetimegames.coreassets/Runtime/Fonts/default/default.ttf');
 }

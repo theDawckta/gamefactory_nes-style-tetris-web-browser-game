@@ -1,22 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Style src="project://database/Assets/Game/UI/GameScreen.uss" />
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Game/UI/GameScreen.uss?fileID=7433441132597879392&amp;guid=f9f0e5be04e0caf46b5680be67499f92&amp;type=3#GameScreen"/>
     <ui:VisualElement name="root" style="flex-grow: 1; flex-direction: row;">
-        <ui:VisualElement name="playfield-region" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);" />
-        <ui:VisualElement name="score-panel-region" style="flex-grow: 0; width: 200px; padding: 10px; border-left-width: 1px; border-left-color: rgba(255, 255, 255, 1); background-color: rgba(0, 0, 0, 1);">
+        <ui:VisualElement name="playfield-region" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);"/>
+        <ui:VisualElement name="score-panel-region" style="flex-grow: 0; width: 200px; padding: 10px; background-color: rgb(0, 0, 0); border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 2px;">
+            <ui:VisualElement name="next-piece-region" class="next-piece-region">
+                <ui:Label name="next-header" text="NEXT" class="next-header"/>
+                <ui:VisualElement name="next-piece-grid" class="next-piece-grid">
+                    <ui:VisualElement class="next-piece-row">
+                        <ui:VisualElement name="np-0-0" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-0-1" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-0-2" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-0-3" class="next-piece-cell"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="next-piece-row">
+                        <ui:VisualElement name="np-1-0" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-1-1" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-1-2" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-1-3" class="next-piece-cell"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="next-piece-row">
+                        <ui:VisualElement name="np-2-0" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-2-1" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-2-2" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-2-3" class="next-piece-cell"/>
+                    </ui:VisualElement>
+                    <ui:VisualElement class="next-piece-row">
+                        <ui:VisualElement name="np-3-0" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-3-1" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-3-2" class="next-piece-cell"/>
+                        <ui:VisualElement name="np-3-3" class="next-piece-cell"/>
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:VisualElement>
             <ui:VisualElement name="score-widget" class="score-widget">
-                <ui:Label name="score-header" text="SCORE" class="score-widget-header" />
-                <ui:Label name="score-value" text="0" class="score-widget-value" />
+                <ui:Label name="score-header" text="SCORE" class="score-widget-header"/>
+                <ui:Label name="score-value" text="0" class="score-widget-value"/>
             </ui:VisualElement>
             <ui:VisualElement name="level-widget" class="level-widget">
-                <ui:Label name="level-header" text="LEVEL" class="level-widget-header" />
-                <ui:Label name="level-value" text="0" class="level-widget-value" />
+                <ui:Label name="level-header" text="LEVEL" class="level-widget-header"/>
+                <ui:Label name="level-value" text="0" class="level-widget-value"/>
             </ui:VisualElement>
             <ui:VisualElement name="lines-widget" class="lines-widget">
-                <ui:Label name="lines-header" text="LINES" class="lines-widget-header" />
-                <ui:Label name="lines-value" text="0" class="lines-widget-value" />
+                <ui:Label name="lines-header" text="LINES" class="lines-widget-header"/>
+                <ui:Label name="lines-value" text="0" class="lines-widget-value"/>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="pause-overlay-region" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; background-color: rgba(0, 0, 0, 0.7);" />
+        <ui:VisualElement name="pause-overlay-region" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; display: none; background-color: rgba(0, 0, 0, 0.7);"/>
     </ui:VisualElement>
 </ui:UXML>

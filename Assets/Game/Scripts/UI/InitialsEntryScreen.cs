@@ -107,10 +107,23 @@ namespace Tetris.UI
         private void DeleteCurrentCharacter()
         {
             if (_slotConfirmed[_activeSlot])
-                return;
+            {
+                _slotConfirmed[_activeSlot] = false;
+                _characterSlotsWidget?.SetSlotConfirmed(_activeSlot, false);
+                if (_confirmRegion != null)
+                    _confirmRegion.style.display = DisplayStyle.None;
+            }
 
             _currentCharacterIndices[_activeSlot] = -1;
-            UpdateSlotDisplay();
+            _characterSlotsWidget?.SetSlotCharacter(_activeSlot, '_');
+
+            if (_activeSlot > 0)
+            {
+                _activeSlot--;
+                _slotConfirmed[_activeSlot] = false;
+                _characterSlotsWidget?.SetSlotConfirmed(_activeSlot, false);
+                _characterSlotsWidget?.SetActiveSlot(_activeSlot);
+            }
         }
 
         private void ConfirmCharacterAndAdvance()
@@ -170,6 +183,9 @@ namespace Tetris.UI
 
         private void SubmitInitials()
         {
+            if (_confirmPromptText != null)
+                _confirmPromptText.text = "SAVING...";
+
             string initials = GetInitialsString();
 
             if (_leaderboardService == null)

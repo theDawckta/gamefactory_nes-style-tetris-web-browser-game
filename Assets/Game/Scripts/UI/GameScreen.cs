@@ -7,6 +7,7 @@ namespace Tetris.UI
         private ScoreWidget _scoreWidget;
         private LevelWidget _levelWidget;
         private LinesWidget _linesWidget;
+        private NextPieceWidget _nextPieceWidget;
 
         protected override void Awake()
         {
@@ -15,6 +16,7 @@ namespace Tetris.UI
             _scoreWidget = new ScoreWidget(rootElement);
             _levelWidget = new LevelWidget(rootElement);
             _linesWidget = new LinesWidget(rootElement);
+            _nextPieceWidget = new NextPieceWidget(rootElement);
         }
 
         public void UpdateScore(int score)
@@ -30,6 +32,11 @@ namespace Tetris.UI
         public void UpdateLines(int lines)
         {
             _linesWidget?.UpdateLines(lines);
+        }
+
+        public void UpdateNextPiece(Tetris.Data.PieceType type)
+        {
+            _nextPieceWidget?.UpdatePiece(type);
         }
 
         public override void Show()

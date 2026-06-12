@@ -37,6 +37,7 @@ namespace Tetris.Systems
             _startScreen.OnStartPressed += HandleStartPressed;
             _gameplayController.OnGameOver += HandleGameOver;
             _gameplayController.OnScoreChanged += HandleScoreChanged;
+            _gameplayController.OnNextPieceChanged += HandleNextPieceChanged;
             _gameOverScreen.OnTopScoreAchieved.AddListener(HandleTopScoreAchieved);
             _gameOverScreen.OnContinuePressed.AddListener(HandleContinuePressed);
             _initialsEntryScreen.OnInitialsConfirmed.AddListener(HandleInitialsConfirmed);
@@ -51,6 +52,7 @@ namespace Tetris.Systems
             {
                 _gameplayController.OnGameOver -= HandleGameOver;
                 _gameplayController.OnScoreChanged -= HandleScoreChanged;
+                _gameplayController.OnNextPieceChanged -= HandleNextPieceChanged;
             }
             if (_gameOverScreen != null)
             {
@@ -71,6 +73,14 @@ namespace Tetris.Systems
         {
             _cachedFinalScore = score;
             _cachedFinalLevel = level;
+            _gameScreen?.UpdateScore(score);
+            _gameScreen?.UpdateLevel(level);
+            _gameScreen?.UpdateLines(lines);
+        }
+
+        private void HandleNextPieceChanged(Tetris.Data.PieceType type)
+        {
+            _gameScreen?.UpdateNextPiece(type);
         }
 
         private void OnEnterStartScreen()
