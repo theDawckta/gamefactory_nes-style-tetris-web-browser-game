@@ -10,10 +10,10 @@ namespace Game.Gameplay
     {
         [SerializeField] private PlayfieldRenderer _renderer;
 
-        private PlayfieldModel _playfield;
-        private GravityController _gravity;
-        private DASController _das;
-        private ScoringSystem _scoring;
+        private PlayfieldModel _playfield = new PlayfieldModel();
+        private GravityController _gravity = new GravityController();
+        private DASController _das = new DASController();
+        private ScoringSystem _scoring = new ScoringSystem();
 
         private PieceType _currentPieceType;
         private int _currentRotation;
@@ -30,14 +30,6 @@ namespace Game.Gameplay
         public event ScoreChangedEventHandler OnScoreChanged;
 
         private const int LineClearAnimationFrames = 30;
-
-        private void Awake()
-        {
-            _playfield = new PlayfieldModel();
-            _gravity = new GravityController();
-            _das = new DASController();
-            _scoring = new ScoringSystem();
-        }
 
         public void StartGame()
         {

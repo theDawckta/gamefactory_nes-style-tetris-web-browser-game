@@ -34,7 +34,7 @@ namespace Tetris.Tests
         [TearDown]
         public void Teardown()
         {
-            Object.Destroy(_gameObject);
+            Object.DestroyImmediate(_gameObject);
         }
 
         private void OnGameOver()
